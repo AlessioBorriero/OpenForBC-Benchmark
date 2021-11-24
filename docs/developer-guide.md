@@ -72,15 +72,15 @@ Here's an example of a benchmark definition:
 }
 ```
 
-| Field             | Type              | Required |
-| ----------------- | ----------------- | -------- |
-| `name`            | `string`          | x        |
-| `description`     | `string`          | x        |
-| `setup_command`   | *commands*        |          |
-| `run_command`     | *commands*        | x        |
-| `cleanup_command` | *commands*        |          |
-| `stats`           | `string\|`*match* | x        |
-| `virtualenv`      | `boolean`         |          |
+| Field             | Type                 | Required |
+| ----------------- | -------------------- | -------- |
+| `name`            | `string`             | x        |
+| `description`     | `string`             | x        |
+| `setup_command`   | *commands*           |          |
+| `run_command`     | *commands*           | x        |
+| `cleanup_command` | *commands*           |          |
+| `stats`           | *command*`\|`*match* | x        |
+| `virtualenv`      | `boolean`            |          |
 
 All the metadata fields are __required__: you need to specify the benchmark's
 *name* and *description*.
@@ -97,19 +97,11 @@ Every *command* field can be a single instance or an array of `command` type.
 The `command` type can be a *string* (the path of the executable to be run) or
 an object with the following fields:
 
-<<<<<<< HEAD
-| Field     | Type     | Required |
-| --------- | -------- | -------- |
-| `path`    | `string` | x        |
-| `env`     | `object` |          |
-| `workdir` | `string` |          |
-=======
 | Field     | Type                    | Required |
-|-----------|-------------------------|----------|
+| --------- | ----------------------- | -------- |
 | `command` | `string\|Array<string>` | x        |
 | `env`     | `object`                |          |
 | `workdir` | `string`                |          |
->>>>>>> 271b1934 (Allow arguments in benchmark commands definition)
 
 The `command` field specifies the command to be executed and is __required__.
 You can specify both a string, which will be split according to UNIX standard,
@@ -120,8 +112,7 @@ JSON *object* with values of type *string*) and its workdir.
 ##### Benchmark output
 
 The `stats` field is used to specify how to obtain resulting benchmark data, it
-can be a *string* containing the path of an executable which will output
-benchmark data to *stdout* when run, or a `match` type object.
+can be a [`command`](#commands) which will output benchmark data to *stdout* when run, or a `match` type object.
 
 Benchmark data written to *stdout* must be a JSON object (its
 [schema](../jsonschema/benchmark_stats.schema.json) is stored in the
