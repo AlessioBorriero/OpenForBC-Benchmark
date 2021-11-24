@@ -1,43 +1,76 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/openforbc.benchmark.schema.json",
-
   "title": "Open-ForBC benchmark schema",
   "description": "A benchmark JSON definition schema",
-
   "$defs": {
     "command": {
-      "oneOf": [ { "type": "string" }, {
-        "type": "object",
-        "properties": {
-          "path": { "type": "string" },
-          "env": {
-            "type": "object",
-            "additionalProperties": { "type": "string" }
-          },
-          "workdir": { "type": "string" }
+      "oneOf": [
+        {
+          "type": "string"
         },
-        "additionalProperties": false,
-        "required": [ "path" ]
-      } ]
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            "env": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "workdir": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "command"
+          ]
+        }
+      ]
     },
     "commands": {
       "oneOf": [
-        { "$ref": "#/$defs/command" },
-        { "type": "array", "items": { "$ref": "#/$defs/command" } }
+        {
+          "$ref": "#/$defs/command"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/command"
+          }
+        }
       ]
     },
     "match": {
       "type": "object",
       "properties": {
-        "regex": { "type": "string" },
-        "file": { "type": "string" }
+        "regex": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        }
       },
       "additionalProperties": false,
-      "required": [ "regex" ]
+      "required": [
+        "regex"
+      ]
     }
   },
-
   "type": "object",
   "properties": {
     "name": {
@@ -63,8 +96,15 @@
     "stats": {
       "description": "Command to be executed in order to fetch stats or a set of stats",
       "oneOf": [
-        { "type": "string" },
-        { "type": "object", "additionalProperties": { "$ref": "#/$defs/match" } }
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/match"
+          }
+        }
       ]
     },
     "virtualenv": {
@@ -73,5 +113,10 @@
     }
   },
   "additionalProperties": false,
-  "required": [ "name", "description", "run_command", "stats" ]
+  "required": [
+    "name",
+    "description",
+    "run_command",
+    "stats"
+  ]
 }
