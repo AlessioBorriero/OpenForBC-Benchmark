@@ -1,0 +1,12 @@
+{
+  "name": "Blender Benchmark",
+  "description": "Runs one/many blender scene(s) and outputs stats",
+  "setup_command": [
+    "./setup.sh",
+    "./setup.py",
+    "chmod +x bin/benchmark-launcher-cli"
+  ],
+  "run_command": "bin/benchmark-launcher-cli benchmark --json",
+  "stats": "true",
+  "virtualenv": true
+}

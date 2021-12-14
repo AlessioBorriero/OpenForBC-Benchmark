@@ -1,0 +1,12 @@
+{
+    "name": "Matrix Multiplication Benchmark using Tensorflow",
+    "description": "Some test of matrices operations",
+    "setup_command": "./setup.sh",
+    "run_command": "./matmul_benchmark.py",
+    "stats": {
+        "matmul_time_ns":{
+            "regex": "Matrix multiplcation time: (\\d+)s"
+        }
+    },
+    "virtualenv": true   
+}

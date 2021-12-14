@@ -1,0 +1,7 @@
+{
+  "args": "bmw27 -b 2.92 --device-type CUDA",
+  "init_command": [
+    "./bin/benchmark-launcher-cli blender download 2.92",
+    "./bin/benchmark-launcher-cli scenes download -b 2.92 bmw27"
+  ]
+}

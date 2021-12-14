@@ -1,0 +1,95 @@
+diff --git a/benchmarks/blender_benchmark/benchmark.json b/benchmarks/blender_benchmark/benchmark.json
+new file mode 100644
+index 00000000..6775d60a
+--- /dev/null
++++ b/benchmarks/blender_benchmark/benchmark.json
+@@ -0,0 +1,12 @@
++{
++  "name": "Blender Benchmark",
++  "description": "Runs one/many blender scene(s) and outputs stats",
++  "setup_command": [
++    "./setup.sh",
++    "./setup.py",
++    "chmod +x bin/benchmark-launcher-cli"
++  ],
++  "run_command": "bin/benchmark-launcher-cli benchmark --json",
++  "stats": "true",
++  "virtualenv": true
++}
+\ No newline at end of file
+diff --git a/benchmarks/blender_benchmark/presets/preset1.json b/benchmarks/blender_benchmark/presets/preset1.json
+new file mode 100644
+index 00000000..5260412f
+--- /dev/null
++++ b/benchmarks/blender_benchmark/presets/preset1.json
+@@ -0,0 +1,7 @@
++{
++  "args": "bmw27 -b 2.92 --device-type CUDA",
++  "init_command": [
++    "./bin/benchmark-launcher-cli blender download 2.92",
++    "./bin/benchmark-launcher-cli scenes download -b 2.92 bmw27"
++  ]
++}
+\ No newline at end of file
+diff --git a/benchmarks/blender_benchmark/setup.sh b/benchmarks/blender_benchmark/setup.sh
+new file mode 100755
+index 00000000..91973257
+--- /dev/null
++++ b/benchmarks/blender_benchmark/setup.sh
+@@ -0,0 +1,2 @@
++#!/usr/bin/env bash
++pip install progressbar
+\ No newline at end of file
+diff --git a/benchmarks/dummy_benchmark/benchmark.json b/benchmarks/dummy_benchmark/benchmark.json
+new file mode 100644
+index 00000000..0d84db30
+--- /dev/null
++++ b/benchmarks/dummy_benchmark/benchmark.json
+@@ -0,0 +1,25 @@
++{
++  "name": "Dummy Benchmark",
++  "description": "Prints something to the output",
++  "run_command": "echo data: 135246",
++  "setup_command": {
++    "command": "echo 'hello world'",
++    "env": {
++      "INSTALL": "1",
++      "ENVIRONMENT": "production"
++    },
++    "workdir": "presets"
++  },
++  "cleanup_command": {
++    "command": [
++      "echo",
++      "daw"
++    ]
++  },
++  "stats": {
++    "data_1": {
++      "regex": "data: (\\d+)"
++    }
++  },
++  "virtualenv": true
++}
+\ No newline at end of file
+diff --git a/benchmarks/dummy_benchmark/presets/preset1.json b/benchmarks/dummy_benchmark/presets/preset1.json
+new file mode 100644
+index 00000000..3d28474c
+--- /dev/null
++++ b/benchmarks/dummy_benchmark/presets/preset1.json
+@@ -0,0 +1,4 @@
++{
++    "args": "--config=preset1.conf",
++    "init_command": "echo setup.sh --config=preset1.conf"
++}
+\ No newline at end of file
+diff --git a/benchmarks/dummy_benchmark/presets/preset2.json b/benchmarks/dummy_benchmark/presets/preset2.json
+new file mode 100644
+index 00000000..e4a9d22e
+--- /dev/null
++++ b/benchmarks/dummy_benchmark/presets/preset2.json
+@@ -0,0 +1,3 @@
++{
++    "args": "--config=preset2.json"
++}
+\ No newline at end of file

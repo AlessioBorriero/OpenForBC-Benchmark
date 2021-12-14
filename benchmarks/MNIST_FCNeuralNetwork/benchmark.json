@@ -1,0 +1,18 @@
+{
+    "name": "Fully Connected Neural Network training and inference over MNIST dataset ",
+    "description": "Trainign and inference with MNIST dataset",
+    "setup_command": "./setup.sh",
+    "run_command": "MNIST_FCNeuralNetwork_benchmark.py",
+    "stats": {
+        "matmul_time_ns":{
+            "regex": "Sample time processing during training: (\\d+) sample/seconds"
+        },
+        "matmul_time_ns":{
+            "regex": "Sample time processing during inference in-sample: (\\d+) sample/seconds"
+        },
+        "matmul_time_ns":{
+            "regex": "Sample time processing during inference out-of-sample: (\\d+) sample/seconds"
+        }
+    },
+    "virtualenv": true   
+}   
