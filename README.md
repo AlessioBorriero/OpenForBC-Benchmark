@@ -13,6 +13,11 @@ This standalone tool was developed to benchmark performances of various partitio
 The framework is compatible with Windows, Linux, and macOS given the benchmark supports the tester operating system.
 ___
 
+`Main branch` [![CI](https://github.com/Open-ForBC/OpenForBC-Benchmark/actions/workflows/CI.yml/badge.svg)](https://github.com/Open-ForBC/OpenForBC-Benchmark/actions/workflows/CI.yml)
+
+`Devel branch` [![CI](https://github.com/Open-ForBC/OpenForBC-Benchmark/actions/workflows/CI.yml/badge.svg?branch=devel)](https://github.com/Open-ForBC/OpenForBC-Benchmark/actions/workflows/CI.yml)
+___
+
 ## Installation
 
 - Clone the repository
