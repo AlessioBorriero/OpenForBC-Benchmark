@@ -1,0 +1,6 @@
+tensorflow-gpu
+sklearn
+GPUtil
+numpy==1.21
+numba
+nvidia-ml-py3
