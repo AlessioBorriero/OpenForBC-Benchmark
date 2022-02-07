@@ -212,8 +212,9 @@ def model_def(hidden_layer, input, output):
             model.add(Dense(hidden_layer[i], activation='relu'))
     loss = keras.losses.CategoricalCrossentropy()
     optim = keras.optimizers.SGD(learning_rate=0.01, momentum=0.05)
-    metrics = ["accuracy"]
-    model.compile(loss=loss, optimizer=optim, metrics=metrics)
+    # metrics = ["accuracy"]
+    # model.compile(loss=loss, optimizer=optim, metrics=metrics)
+    model.compile(loss=loss, optimizer=optim)
     return model
 
 
@@ -233,7 +234,9 @@ def main():
     # monitor = Monitor(gpu_performance_sampling_time)     # GPU MONITOR
     # begin = timer()  # Duration of the whole fit() method run
     nn.fit(X_train, Y_train, epochs=n_epochs, batch_size=batch_size,
-           callbacks=[time_callback, GPUstats], validation_split=0.3, verbose=0)
+           callbacks=[time_callback, GPUstats],
+        #    validation_split=0.3,
+           verbose=0)
     # training_time = timer() - begin  # Duration of the whole fit() method run
     # monitor.stop()                                       # GPU MONITOR
     gpu_loads = GPUstats.gpu_load
