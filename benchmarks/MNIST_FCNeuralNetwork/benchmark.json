@@ -6,41 +6,41 @@
     "setup_command": "./setup.sh",
     "run_command": "./MNIST_FCNeuralNetwork_benchmark.py",
     "stats": {
-        "GPU_load_training":{
-            "regex": "Average GPU usage during training: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+        "training_GPU_load":{
+            "regex": "Training GPU usage: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
-        "GPU_memory_training":{
-            "regex": "Average GPU memory usage during training: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
-        },
-        "GPU_load_inference_insample":{
-            "regex": "Average GPU usage during inference in-sample: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
-        },
-        "GPU_memory_inference_insample":{
-            "regex": "Average GPU memory usage during inference in-sample: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
-        },
-        "GPU_load_inference_outsample":{
-            "regex": "Average GPU usage during inference out-of-sample: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
-        },
-        "GPU_memory_inference_outsample":{
-            "regex": "Average GPU memory usage during inference out-of-sample: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+        "training_GPU_memory":{
+            "regex": "Training GPU memory usage: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
         "training_time":{
-            "regex": "Training the model took [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+) seconds"
+            "regex": "Training Time: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
-        "trainging_sample_processing_time":{
-            "regex": "Sample processing time during training: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+) sample/seconds"
+        "training_sample_processing_speed":{
+            "regex": "Training sample processing speed: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
-        "Inference_in_sample_time":{
-            "regex": "Testing the model in-sample took [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+) seconds"
+        "insample_inference_GPU_load":{
+            "regex": "In-sample inference GPU usage: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
-        "Inference_in_sample_processing_time":{
-            "regex": "Sample processing time during inference in-sample: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+) sample/seconds"
+        "insample_inference_GPU_memory":{
+            "regex": "In-sample inference GPU memory usage: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
-        "Inference_out_of_sample_time":{
-            "regex": "Testing the model out-of-sample took [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+) seconds"
+        "in_sample_inference_time":{
+            "regex": "In-sample inference time: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         },
-        "Inference_out_of_sample_processing_time":{
-            "regex": "Sample processing time during inference out-of-sample: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+) sample/seconds"
+        "in_sample_inference_processing_speed":{
+            "regex": "In-sample sample processing speed: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+        },
+        "out_of_sample_GPU_load":{
+            "regex": "Out-of-Sample inference GPU usage: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+        },
+        "out_of_sample_GPU_memory":{
+            "regex": "Out-of-Sample inference GPU memory usage: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+        },
+        "out_of_sample_inference_time":{
+            "regex": "Out-of-Sample inference time: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+        },
+        "out_of_sample_inference_processing_speed":{
+            "regex": "Out-of-Sample sample processing speed: [+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
         }
     },
     "virtualenv": true   
