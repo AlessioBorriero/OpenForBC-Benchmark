@@ -41,3 +41,6 @@ MANIFEST
 .coverage
 coverage.xml
 .tox
+
+# Other
+.npz
