@@ -255,7 +255,6 @@ def data_loading(d, N, n_of_class):
 
 def main(d, batch_size, net_size, n_of_class):
     dt_string = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
-
     stats_file = open("stats_file"+dt_string+".txt", 'w')
 
     (X_train, Y_train), (X_test, Y_test) = data_loading(d, N, n_of_class)
@@ -306,16 +305,21 @@ def main(d, batch_size, net_size, n_of_class):
         for X in X_test: # online prediction (one sample at time)
             X=np.expand_dims(X,0)
             start_time = time.time()
-            pred = model.predict(X,
-                            batch_size=batch_size
-                            # callbacks=[time_callback]
-                            ).argmax(1)
+            pred = model(X)
+            # pred = model.predict(X,
+            #                 batch_size=batch_size
+            #                 # callbacks=[time_callback]
+            #                 ).argmax(1)
+            # pred = model.predict_on_batch(X
+            #                 # batch_size=batch_size
+            #                 # callbacks=[time_callback]
+            #                 ).argmax(1)
             end_time = time.time() - start_time
             total_time += end_time
             sample_count += 1
             latency = total_time/sample_count
             throughput = sample_count/total_time
-            L = [str(end_time),',', str(sample_count),',', str(latency),',', str(throughput)]
+            L = [str(end_time),',', str(sample_count),',', str(latency),',', str(throughput),',', str(total_time)]
             stats_file.writelines(L)
             stats_file.writelines('\n')
 
