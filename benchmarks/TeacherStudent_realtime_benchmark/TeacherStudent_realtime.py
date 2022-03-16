@@ -34,6 +34,7 @@ net_size = 2000
 d = 20000
 
 n_epochs = 1
+n_epochs_training = 200
 n_of_class = 10
 N = 150
 teacher_size = 8
@@ -55,12 +56,12 @@ Raise error if correct arguments aren't given
 if len(sys.argv) != 3:
     print("Teacher-Student benchmark need 2 arguments:")
     print("- Device")
-    print("- Changing paramter")
+    print("- Training mode or inference mode")
     sys.exit(1)
 
 
 dev = sys.argv[1]
-param = sys.argv[2]
+mode = sys.argv[2]
 
 """
 SET DEVICE
@@ -253,9 +254,51 @@ def data_loading(d, N, n_of_class):
     x_train, x_test, y_train, y_test = data[:int(N*9/10)], data[int(N*9/10):], labels[:int(N*9/10)], labels[int(N*9/10):]
     return (x_train, y_train), (x_test, y_test)
 
+def main_training(d, batch_size, net_size, n_of_class):
+    dt_string = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
+    stats_file = open("stats_file_training"+dt_string+".txt", 'w')
+
+    (X_train, Y_train), (X_test, Y_test) = data_loading(d, N, n_of_class)
+
+    """
+    Training
+    """
+    model = Sequential()
+
+    if net_size==0:
+        model.add(Dense(n_of_class,
+                activation='softmax',
+                input_shape=(d,)))
+    else:
+        model.add(Dense(net_size, activation='sigmoid', input_shape=(d,)))
+        model.add(Dense(n_of_class, activation='softmax'))
+
+    loss = keras.losses.CategoricalCrossentropy()
+    optim = keras.optimizers.SGD(learning_rate=0.01, momentum=0.05)
+    metrics=["accuracy"]
+    model.compile(loss=loss, optimizer=optim, metrics=metrics)
+    # model.summary()
+
+
+    time_callback = TimeHistory()
+    # GPUstats = GPUstatistics_time(0.01)
+    model.fit(X_train, Y_train, epochs=n_epochs_training, batch_size=batch_size,
+            callbacks=[time_callback],
+            verbose=1)
+    # GPUstats.stop()
+    training_time = sum(time_callback.batch_times) # total time
+    time_per_sample = training_time/(len(X_train)*n_epochs_training)  # time per sample
+    training_sample_per_second = 1./time_per_sample # sample per seconds
+
+    L = [str(training_time),',', str(time_per_sample),
+        ',', str(training_sample_per_second)]
+
+    print('TRAINING DONE!')
+    stats_file.close()
+
 def main(d, batch_size, net_size, n_of_class):
     dt_string = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
-    stats_file = open("stats_file"+dt_string+".txt", 'w')
+    stats_file = open("stats_file_inference"+dt_string+".txt", 'w')
 
     (X_train, Y_train), (X_test, Y_test) = data_loading(d, N, n_of_class)
 
@@ -334,5 +377,8 @@ if __name__ == "__main__":
 
         nvidia_smi.nvmlInit()
         handle = nvidia_smi.nvmlDeviceGetHandleByIndex(0)
-        main(d, batch_size, net_size, n_of_class)
+        if mode=='training':
+            main_training(d, batch_size, net_size, n_of_class)
+        elif mode=='inference':
+            main(d, batch_size, net_size, n_of_class)
 
